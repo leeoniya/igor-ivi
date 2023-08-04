@@ -1,0 +1,24 @@
+{
+  "name": "igor-ivi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ivi/htm": "^3.0.1",
+    "@ivi/rollup-plugin": "^3.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "fastify": "^4.21.0",
+    "ivi": "^3.0.2",
+    "rollup": "^3.27.2",
+    "tslib": "^2.6.1",
+    "typescript": "^5.1.6"
+  }
+}
