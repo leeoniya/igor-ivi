@@ -1,6 +1,7 @@
-import { component, useState, useEffect, getProps, strictEq } from "ivi";
+import { component, useEffect, getProps, strictEq } from "ivi";
 import { htm as html } from "@ivi/htm";
 import { fakeFetch } from './data.js';
+import { useState2 } from "./useState2.js";
 
 interface TableProps {
   cap: string;
@@ -14,14 +15,14 @@ interface TableData {
 }
 
 export const Table = component<TableProps>((c) => {
-  let [data, setData] = useState<TableData | null>(c, null);
+  let data = useState2<TableData | null>(c, null);
 
   const update = useEffect(c, (seed: number) => {
     let { url } = getProps(c);
 
     fakeFetch(url)
       .then(r => r.json())
-      .then(setData);
+      .then(data);
   }, strictEq);
 
   return (p) => {
