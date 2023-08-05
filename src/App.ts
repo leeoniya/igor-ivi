@@ -33,8 +33,8 @@ const App = component((c) => {
 
   // initial fetch
   useEffect(c, () => {
-    fetchData('f1');
-    fetchData('f2');
+    upd1();
+    upd2();
   })();
 
   return () => [
