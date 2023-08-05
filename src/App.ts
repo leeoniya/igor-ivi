@@ -24,8 +24,12 @@ const App = component((c) => {
         invalidate(c);
       });
 
+  let upd1 = () => fetchData("f1");
+  let upd2 = () => fetchData("f2");
+
   let alertVisible = useState2(c, false);
   let dismissAlert = () => alertVisible(false);
+  let showAlert = () => alertVisible(true);
 
   // initial fetch
   useEffect(c, () => {
@@ -36,10 +40,10 @@ const App = component((c) => {
   return () => [
     Table({ cap: "Routes", data: data.f1 }),
     Table({ cap: "Operators", data: data.f2 }),
-    Button("Update Table 1", () => fetchData("f1")),
-    Button("Update Table 2", () => fetchData("f2")),
-    Button("Show Alert", () => alertVisible(true)),
-    alertVisible() ? Alert({ text: "Error!", dismiss: dismissAlert }) : null,
+    Button("Update Table 1", upd1),
+    Button("Update Table 2", upd2),
+    Button("Show Alert", showAlert),
+    alertVisible() ? Alert("Error!", dismissAlert) : null,
   ];
 });
 
