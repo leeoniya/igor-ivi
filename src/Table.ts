@@ -1,42 +1,23 @@
-import { component, useEffect, getProps, strictEq } from "ivi";
+import { component, shallowEq } from "ivi";
 import { htm as html } from "@ivi/htm";
-import { fakeFetch } from './data.js';
-import { useState2 } from "./useState2.js";
+import { TableData } from "./data.js";
 
 interface TableProps {
   cap: string;
-  url: string;
-  seed: number;
-}
-
-interface TableData {
-  fields: string[];
-  data: string[][];
+  data: TableData | null;
 }
 
 export const Table = component<TableProps>((c) => {
-  let data = useState2<TableData | null>(c, null);
-
-  const update = useEffect(c, (seed: number) => {
-    let { url } = getProps(c);
-
-    fakeFetch(url)
-      .then(r => r.json())
-      .then(data);
-  }, strictEq);
-
-  return (p) => {
-    update(p.seed);
-
-    let d = data();
-
+  return ({cap, data: d}) => {
     if (d == null) {
       return null;
     }
 
+    console.log(`redraw ${cap}!`);
+
     return html`
       <div>
-        <h3>${p.cap}</h3>
+        <h3>${cap}</h3>
         <table>
           <thead>
             <tr>
@@ -60,6 +41,6 @@ export const Table = component<TableProps>((c) => {
       </div>
     `;
   };
-});
+}, shallowEq);
 
 //${List(data, getEntryId, (entry) => Row({ entry, selected: selected === entry.id }))}
